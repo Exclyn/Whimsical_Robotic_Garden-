@@ -23,7 +23,7 @@ Whimsical Robotic Garden uses AI that generates music track, artwork, and story
 
 
 ### How to Use:
-1. Copy the entire code above
+1. Copy the entire code
 2. Save as `AI_Project.html`
 3. Open in any web browser (Chrome, Firefox, Edge, etc.)
 4. Click the play button to generate and hear the music
