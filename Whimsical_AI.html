@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whimsical Robotic Garden - AI Project</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #e0f7fa, #f3e5f5);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1000px;
+            background: rgba(255, 255, 255, 0.92);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto auto;
+            grid-template-areas:
+                "header header"
+                "art music"
+                "story story";
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                grid-template-areas:
+                    "header"
+                    "art"
+                    "music"
+                    "story";
+            }
+        }
+        
+        header {
+            grid-area: header;
+            background: linear-gradient(120deg, #4fc3f7, #7b1fa2);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .art-section {
+            grid-area: art;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-right: 1px dashed #e0e0e0;
+        }
+        
+        .music-section {
+            grid-area: music;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .story-section {
+            grid-area: story;
+            background: #f9f9f9;
+            padding: 40px;
+            border-top: 1px dashed #e0e0e0;
+        }
+        
+        h2 {
+            color: #7b1fa2;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+        
+        .cover-art {
+            width: 100%;
+            max-width: 350px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease;
+        }
+        
+        .cover-art:hover {
+            transform: scale(1.03);
+        }
+        
+        .music-player {
+            width: 100%;
+            max-width: 400px;
+            background: #f5f5f5;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .player-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        button {
+            background: #7b1fa2;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(123, 31, 162, 0.3);
+        }
+        
+        button:hover {
+            background: #6a1b9a;
+            transform: translateY(-2px);
+        }
+        
+        button:active {
+            transform: translateY(1px);
+        }
+        
+        .story-content {
+            line-height: 1.8;
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: justify;
+        }
+        
+        .highlight {
+            background: linear-gradient(120deg, #e1f5fe, #f3e5f5);
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+        
+        .process-info {
+            margin-top: 40px;
+            background: #f0f4f8;
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 0.95rem;
+        }
+        
+        .process-info h3 {
+            color: #4fc3f7;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .credits {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Whimsical Robotic Garden</h1>
+            <p class="subtitle">An AI-Generated Music & Art Experience</p>
+        </header>
+        
+        <section class="art-section">
+            <h2>AI-Generated Cover Art</h2>
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIiB2aWV3Qm94PSIwIDAgNTAwIDUwMCI+PHJlY3Qgd2lkdGg9IjUwMCIgaGVpZ2h0PSI1MDAiIGZpbGw9IiNlMGY3ZmEiLz48Y2lyY2xlIGN4PSIyNTAiIGN5PSIyMDAiIHI9IjgwIiBmaWxsPSIjZmZlYmNjIi8+PGNpcmNsZSBjeD0iMjAwIiBjeT0iMjgwIiByPSI2MCIgZmlsbD0iI2ZmY2NjYyIvPjxjaXJjbGUgY3g9IjMwMCIgY3k9IjMwMCIgcj0iNzAiIGZpbGw9IiNjY2ZmY2MiLz48Y2lyY2xlIGN4PSIzNTAiIGN5PSIyMjAiIHI9IjUwIiBmaWxsPSIjY2NjY2ZmIi8+PHBhdGggZD0iTTE1MCAzNTBMMzUwIDM1MEwzNTAgNDUwTDE1MCA0NTBaIiBmaWxsPSIjOThjYzY2Ii8+PHBhdGggZD0iTTE3MCAzMzBMMzMwIDMzMEwzMzAgNDAwTDE3MCA0MDBaIiBmaWxsPSIjNjZiMzgzIi8+PHBhdGggZD0iTTIyMCAyNTBMMjIwIDE4MEwyODAgMTgwTDI4MCAyNTBaIiBmaWxsPSIjODJhYWRlIi8+PHBhdGggZD0iTTI0MCAyMzBMMjQwIDE5MEwyNjAgMTkwTDI2MCAyMzBaIiBmaWxsPSIjNGZjM2Y3Ii8+PGNpcmNsZSBjeD0iMTIwIiBjeT0iMTUwIiByPSIzMCIgZmlsbD0iI2ZmY2MzMCIvPjxjaXJjbGUgY3g9IjM4MCIgY3k9IjE1MCIgcj0iMjAiIGZpbGw9IiNmZmNjMzAiLz48Y2lyY2xlIGN4PSI0MDAiIGN5PSIyMDAiIHI9IjE1IiBmaWxsPSIjZmZjYzMwIi8+PC9zdmc+" alt="Robotic Garden" class="cover-art">
+            <p style="margin-top: 15px; text-align: center; font-style: italic; color: #666;">
+                Mechanical flowers with holographic butterflies in a digital garden
+            </p>
+        </section>
+        
+        <section class="music-section">
+            <h2>AI-Generated Music</h2>
+            <div class="music-player">
+                <p style="text-align: center; margin-bottom: 15px; font-weight: 500;">
+                    "Whimsical Robotic Garden" (1:20)
+                </p>
+                <div class="player-controls">
+                    <button id="playBtn">▶</button>
+                    <button id="pauseBtn">⏸</button>
+                    <button id="stopBtn">⏹</button>
+                </div>
+                <p style="margin-top: 20px; text-align: center; color: #666;">
+                    <span class="highlight">Listen for:</span> Music box tones → Electronic symphony → Robotic buzzing
+                </p>
+            </div>
+        </section>
+        
+        <section class="story-section">
+            <h2>The Story</h2>
+            <div class="story-content">
+                <p>In <span class="highlight">Grandma Robo's garden</span>, the mechanical sunflowers hummed a soft, metallic lullaby whenever the moonlight touched their petals. On this particular evening, a gentle rain began to fall - not of water, but of <span class="highlight">glitchy, holographic droplets</span> that shimmered with binary patterns.</p>
+                
+                <p style="margin-top: 15px;">As the digital rain pattered against their chrome stems, the flowers responded by <span class="highlight">modulating their harmonic frequencies</span>. The garden filled with an evolving symphony - starting as simple music box chimes that gradually transformed into a complex electronic arrangement. Tiny <span class="highlight">robot bees</span>, their wings buzzing in perfect 4/4 time, danced between the blossoms, adding rhythmic counterpoints to the melody.</p>
+                
+                <p style="margin-top: 15px;">The rain intensified, its <span class="highlight">glitchy percussion</span> creating syncopated beats that echoed through the garden. Holographic butterflies, emerging from projector flowers, began to <span class="highlight">swirl in fractal patterns</span> as the music reached its crescendo - a joyful celebration of nature and technology harmonizing under the electric stars.</p>
+            </div>
+            
+            <div class="process-info">
+                <h3>About This Project</h3>
+                <p>This creative work demonstrates generative AI by combining:</p>
+                <ul style="margin-top: 10px; padding-left: 20px;">
+                    <li><span class="highlight">Text-to-music generation</span> (Suno AI) using prompt engineering</li>
+                    <li><span class="highlight">Algorithmic SVG artwork</span> created with code</li>
+                    <li><span class="highlight">Procedural audio synthesis</span> in the browser</li>
+                    <li>Original narrative augmented with AI-inspired elements</li>
+                </ul>
+                <p style="margin-top: 10px;">All components are original creations designed to be positive, non-derivative, and ethically sound.</p>
+            </div>
+            
+            <div class="credits">
+                <p>Created for Generative AI Assignment | Music & Story © 2023</p>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Audio context for procedural music generation
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        let currentAudioSource = null;
+        
+        // DOM Elements
+        const playBtn = document.getElementById('playBtn');
+        const pauseBtn = document.getElementById('pauseBtn');
+        const stopBtn = document.getElementById('stopBtn');
+        
+        // Musical parameters
+        const bpm = 90;
+        const noteDuration = 60 / bpm;
+        
+        // Play button functionality
+        playBtn.addEventListener('click', () => {
+            if (audioContext.state === 'suspended') {
+                audioContext.resume();
+            }
+            
+            stopAudio(); // Stop any existing playback
+            generateMusic();
+        });
+        
+        // Pause button functionality
+        pauseBtn.addEventListener('click', () => {
+            if (audioContext.state === 'running') {
+                audioContext.suspend();
+            }
+        });
+        
+        // Stop button functionality
+        stopBtn.addEventListener('click', stopAudio);
+        
+        // Stop audio function
+        function stopAudio() {
+            if (currentAudioSource) {
+                currentAudioSource.stop();
+                currentAudioSource = null;
+            }
+        }
+        
+        // Procedural music generation
+        function generateMusic() {
+            currentAudioSource = audioContext.createBufferSource();
+            const buffer = audioContext.createBuffer(2, audioContext.sampleRate * 80, audioContext.sampleRate);
+            
+            // Generate left channel (melody)
+            const leftChannel = buffer.getChannelData(0);
+            // Generate right channel (harmony/effects)
+            const rightChannel = buffer.getChannelData(1);
+            
+            // Create evolving procedural music
+            let time = 0;
+            let phase = 0;
+            
+            // Section 1: Music box tones (0-20 seconds)
+            for (let i = 0; i < 20 * audioContext.sampleRate; i++) {
+                time = i / audioContext.sampleRate;
+                const frequency = 440 + Math.sin(time * 2) * 5;
+                phase += 2 * Math.PI * frequency / audioContext.sampleRate;
+                
+                const value = Math.sin(phase) * 0.2 * Math.exp(-time * 0.1);
+                leftChannel[i] = value;
+                rightChannel[i] = value * 0.7;
+            }
+            
+            // Section 2: Add electronic elements (20-40 seconds)
+            for (let i = 20 * audioContext.sampleRate; i < 40 * audioContext.sampleRate; i++) {
+                time = i / audioContext.sampleRate;
+                const baseFreq = 220 + Math.sin(time * 0.5) * 30;
+                
+                // Create harmonics
+                let sample = 0;
+                for (let harmonic = 1; harmonic <= 5; harmonic++) {
+                    const freq = baseFreq * harmonic;
+                    phase += 2 * Math.PI * freq / audioContext.sampleRate;
+                    sample += Math.sin(phase) * (1 / harmonic) * 0.15;
+                }
+                
+                // Add rhythmic elements
+                if (Math.floor(time * 2) % 4 < 0.1) {
+                    sample += Math.random() * 0.1;
+                }
+                
+                // Apply envelope
+                const envelope = Math.min(1, (time - 20) * 0.5) * Math.max(0, 1 - (time - 35) * 0.2);
+                sample *= envelope;
+                
+                leftChannel[i] = sample;
+                rightChannel[i] = sample * 0.8;
+            }
+            
+            // Section 3: Full electronic symphony with robotic effects (40-80 seconds)
+            for (let i = 40 * audioContext.sampleRate; i < leftChannel.length; i++) {
+                time = i / audioContext.sampleRate;
+                
+                // Main melody
+                const melodyFreq = [330, 392, 294, 349][Math.floor(time * 2) % 4];
+                let melody = Math.sin(phase * melodyFreq/330) * 0.1;
+                
+                // Bass line
+                const bassFreq = 110;
+                const bass = Math.sin(phase * bassFreq/330) * 0.15 * Math.sin(time * Math.PI);
+                
+                // Robotic buzzing effect
+                let buzz = 0;
+                if (Math.floor(time * 8) % 8 < 0.5) {
+                    buzz = (Math.random() - 0.5) * 0.1;
+                }
+                
+                // Glitchy percussion
+                let percussion = 0;
+                if (Math.floor(time * 4) % 4 === 0 && time % 0.5 < 0.05) {
+                    percussion = (Math.random() - 0.5) * 0.2;
+                }
+                
+                const combined = (melody + bass + buzz + percussion) * 
+                                Math.min(1, (time - 40) * 0.3) * 
+                                (1 - (time - 70) * 0.05);
+                
+                leftChannel[i] = combined;
+                rightChannel[i] = combined * 0.9;
+                
+                phase += 2 * Math.PI * 330 / audioContext.sampleRate;
+            }
+            
+            // Play the generated buffer
+            currentAudioSource.buffer = buffer;
+            currentAudioSource.connect(audioContext.destination);
+            currentAudioSource.start();
+        }
+    </script>
+</body>
+</html>
